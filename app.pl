@@ -5,9 +5,9 @@ use WebService::Hexonet::Connector;
 my $api = WebService::Hexonet::Connector::connect(
 	{
 		url => "https://coreapi.1api.net/api/call.cgi",
-        entity => "1234",
-        login => "test.user",
-        password => "test.passw0rd"
+		entity => "1234",
+		login => "test.user",
+		password => "test.passw0rd"
 	}
 );
 
