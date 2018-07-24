@@ -15,6 +15,7 @@ cpanm WebService::Hexonet::Connector
 # or by filename
 cpanm HEXONET/WebSservice-Hexonet-Connector-1.03.tar.gz
 ```
+NOTE: I got this only working by sudo'ing these commands.
 
 ## Run the App
 
