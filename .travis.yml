@@ -1,0 +1,26 @@
+language: perl
+dist: xenial
+notifications:
+  email:
+    recipients:
+    - kschwarz@hexonet.net
+    on_success: never
+    on_failure: always
+perl:
+  - "5.28"
+  - "5.26"
+  - "dev"               # installs latest developer release of perl (e.g. 5.21.8)
+  - "blead"             # builds perl from git (master branch)
+matrix:
+  allow_failures:
+    - perl: blead       # ignore failures for blead perl
+    - perl: dev         # ignore failures for dev perl
+install:
+  - cpanm WebService::Hexonet::Connector --quiet --notest --sudo
+  
+  #- cpan-install WebService::Hexonet::Connector       # installs prereqs, including recommends
+  #- PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install WebService::Hexonet::Connector'
+script:
+  # replace the below with unit tests one day
+  - perl ./app_session.pl
+  - perl ./app_nosession.pl

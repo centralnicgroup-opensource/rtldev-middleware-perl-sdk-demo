@@ -1,4 +1,5 @@
 # perl-sdk-demo
+
 Perl SDK Demo App
 
 ## Requirements
@@ -14,7 +15,11 @@ cpanm WebService::Hexonet::Connector
 
 # or by filename
 cpanm HEXONET/WebSservice-Hexonet-Connector-1.03.tar.gz
+
+# or using perl itself
+PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install WebService::Hexonet::Connector'
 ```
+
 NOTE: I got this only working by sudo'ing these commands.
 In case you install by filename, please check the [release overview](https://github.com/hexonet/perl-sdk/releases) for the most current release and use that version instead.
 
