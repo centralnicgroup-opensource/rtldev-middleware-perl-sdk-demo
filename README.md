@@ -21,5 +21,9 @@ In case you install by filename, please check the [release overview](https://git
 ## Run the App
 
 ```bash
-perl app.pl
+# session-based communication
+perl app_session.pl
+
+# session-less communication
+perl app_nosession.pl
 ```
