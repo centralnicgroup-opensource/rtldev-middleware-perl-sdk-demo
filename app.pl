@@ -1,31 +1,46 @@
+use 5.026_000;
 use strict;
 use warnings;
 use WebService::Hexonet::Connector;
 
-my $api = WebService::Hexonet::Connector::connect(
-	{
-		url => "https://coreapi.1api.net/api/call.cgi",
-		entity => "1234",
-		login => "test.user",
-		password => "test.passw0rd"
-	}
-);
+my $cl = WebService::Hexonet::Connector::APIClient->new();
+$cl->useOTESystem();
+$cl->setCredentials("test.user", "test.passw0rd");
+$cl->setRemoteIPAddress("1.2.3.4");
 
-# Call a command
-my $response = $api->call(
-	{
-		command => "QueryDomainList",
-		limit => 5
-	}
-);
+my $response = $cl->login();
+# in case of 2FA use:
+# my $response = $cl->login("12345678");
 
-# get the result in the format you want
-my $res = $response->as_list();
-$res = $response->as_list_hash();
-$res = $response->as_hash();
+if ($response->isSuccess()) {
+    # now the session will be used for communication in background
+    # instead of the provided credentials
+    # if you need something to rebuild connection on next page visit,
+    # so in a frontend-session based environment, please consider
+    # saveSession and reuseSession methods
 
-# get the response code and the response description
-my $code = $response->code();
-my $description = $response->description();
+    # Call a command
+    my $response = $cl->request(
+        {
+            COMMAND => "QueryDomainList",
+            LIMIT => 5
+        }
+    );
 
-print "$code $description";
+    # get the result in the format you want
+    my $res;
+    $res = $response->getListHash();
+    $res = $response->getHash();
+    $res = $response->getPlain();
+
+    # get the response code and the response description
+    my $code = $response->code();
+    my $description = $response->description();
+
+    print "$code $description";
+
+    # close Backend API Session
+    # you may verify the result of the logout procedure
+    # like for the login procedure above
+    $r->logout();
+};
