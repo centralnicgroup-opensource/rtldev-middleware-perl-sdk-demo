@@ -9,6 +9,12 @@ notifications:
 perl:
   - "5.28"
   - "5.26"
+# Trigger a push build on master and dependabot branches + PRs build on every branches
+# Avoid double build on PRs (See https://github.com/travis-ci/travis-ci/issues/1147)
+branches:
+  only:
+    - master
+    - /^dependabot.*$/
 install:
   - cpanm WebService::Hexonet::Connector --quiet --notest --sudo
 script:
