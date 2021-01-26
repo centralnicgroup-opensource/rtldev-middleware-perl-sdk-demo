@@ -1,1 +1,1 @@
-requires 'WebService::Hexonet::Connector', '>= 2.010002';
+requires 'WebService::Hexonet::Connector', '>= 2.010001';
