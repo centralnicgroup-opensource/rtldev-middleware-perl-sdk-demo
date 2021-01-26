@@ -18,6 +18,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: "update dependencies"
+        run: |
+          cpanm App::cpanoutdated
+          cpan-outdated -p --exclude-core | cpanm
       - name: install perl dependencies
         uses: perl-actions/install-with-cpanm@v1
         with:
@@ -25,8 +29,6 @@ jobs:
           sudo: false
           args: "--quiet --notest"
           # replace the below with unit tests one day
-      - name: "update dependencies"
-        run: cpan-outdated -p --exclude-core | cpanm
       - name: "run app"
         run: |
           perl ./app_session.pl
