@@ -19,9 +19,9 @@ jobs:
         uses: shogo82148/actions-setup-perl@v1
         with:
           perl-version: ${{ matrix.perl-version }}
-      - run: |
-          perl -V
-          cpanm http://www.cpan.org/authors/id/H/HE/HEXONET/WebService-Hexonet-Connector-v2.10.2.tar.gz
+      - run: cpanm --cpanfile="cpanfile" --installdeps .
+        env:
+          PERL_MM_USE_DEFAULT: 1
       - name: "run app"
         run: |
           perl ./app_session.pl
