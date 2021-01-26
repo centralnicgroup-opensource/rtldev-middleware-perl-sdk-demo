@@ -18,8 +18,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - run: |
-          apt install perl-doc ctags perltidy
       - name: install perl dependencies
         uses: perl-actions/install-with-cpanm@v1
         with:
@@ -27,6 +25,9 @@ jobs:
           sudo: false
           args: "--quiet --notest"
           # replace the below with unit tests one day
-      - run: |
+      - name: "update dependencies"
+        run: cpan-outdated -p --exclude-core | cpanm
+      - name: "run app"
+        run: |
           perl ./app_session.pl
           perl ./app_nosession.pl
