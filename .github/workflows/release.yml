@@ -23,7 +23,7 @@ jobs:
         with:
           cpanfile: "cpanfile"
           sudo: false
-          args: "--self-upgrade --quiet --notest --installdeps"
+          args: "--quiet --notest --installdeps"
           # replace the below with unit tests one day
       - name: "run app"
         run: |
