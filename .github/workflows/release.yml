@@ -1,0 +1,32 @@
+name: Release
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: "perl v${{ matrix.perl-version }}"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        perl-version:
+          - "5.32"
+          - "5.30"
+
+    container:
+      image: perldocker/perl-tester:${{ matrix.perl-version }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          apt install perl-doc ctags perltidy
+      - name: install perl dependencies
+        uses: perl-actions/install-with-cpanm@v1
+        with:
+          cpanfile: "cpanfile"
+          sudo: false
+          args: "--quiet --notest"
+          # replace the below with unit tests one day
+      - run: |
+          perl ./app_session.pl
+          perl ./app_nosession.pl

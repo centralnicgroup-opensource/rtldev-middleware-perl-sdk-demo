@@ -5,23 +5,15 @@ Perl SDK Demo App
 ## Requirements
 
 * Having the most current perl v5 release installed
-* Having cpanm installed (App::cpanminus)
+* Having cpanm installed [App::cpanminus](https://metacpan.org/pod/App::cpanminus)
 
 Now install our Perl API Connector Library:
 
 ```bash
-# by Module ID
-cpanm WebService::Hexonet::Connector
-
-# or by filename
-cpanm HEXONET/WebSservice-Hexonet-Connector-1.03.tar.gz
-
-# or using perl itself
-PERL_MM_USE_DEFAULT=1 perl -MCPAN -e 'install WebService::Hexonet::Connector'
+perl cpanm --installdeps --no-test --quiet .
 ```
 
-NOTE: I got this only working by sudo'ing these commands.
-In case you install by filename, please check the [release overview](https://github.com/hexonet/perl-sdk/releases) for the most current release and use that version instead.
+NOTE: Eventually you need to use the --sudo flag in the above command.
 
 ## Run the App
 
