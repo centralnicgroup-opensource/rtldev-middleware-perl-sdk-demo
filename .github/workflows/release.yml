@@ -11,23 +11,19 @@ jobs:
       matrix:
         perl-version:
           - "5.32"
-          - "5.30"
+          #- "5.30"
 
     container:
       image: perldocker/perl-tester:${{ matrix.perl-version }}
 
     steps:
       - uses: actions/checkout@v2
-      - name: "update dependencies"
-        run: |
-          cpanm App::cpanoutdated
-          cpan-outdated -p --exclude-core | cpanm
       - name: install perl dependencies
         uses: perl-actions/install-with-cpanm@v1
         with:
           cpanfile: "cpanfile"
           sudo: false
-          args: "--quiet --notest"
+          args: "--self-upgrade --quiet --notest --installdeps"
           # replace the below with unit tests one day
       - name: "run app"
         run: |
