@@ -1,23 +1,11 @@
-name: Release
+name: Test
 on: 
-  # will run for every branch, except tags. See RSRMID-206.
-  push:
-    # Sequence of patterns matched against refs/heads
-    branches:
-      - "**"
-    # Sequence of patterns matched against refs/tags
-    tags-ignore: 
-      - "**"
-  pull_request:
-    branches:
-      - "**"
-    tags-ignore: 
-      - "**"
+  workflow_call:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: "Perl v${{ matrix.perl-version }}"
+    name:  🧪 Build & Test
     if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.actor != 'dependabot[bot]')
     strategy:
       fail-fast: false
@@ -35,7 +23,7 @@ jobs:
       - run: cpanm --cpanfile="cpanfile" --installdeps .
         env:
           PERL_MM_USE_DEFAULT: 1
-      - name: "run app"
+      - name: run app
         run: |
           perl ./app_session.pl
           perl ./app_nosession.pl
