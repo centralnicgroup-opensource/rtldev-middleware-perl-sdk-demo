@@ -5,5 +5,5 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: "chore(ci dep)"
+      prefix: "chore"
       include: "scope"
