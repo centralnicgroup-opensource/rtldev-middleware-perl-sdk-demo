@@ -4,16 +4,15 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    name:  🧪 Build & Test
     if: github.event_name == 'pull_request' || (github.event_name == 'push' && github.actor != 'dependabot[bot]')
+    name:  🧪 Build & Test
+    runs-on: ${{ vars.RTLDEV_MW_CI_OS }}
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
-        perl-version:
-          - "5.32"
-          #- "5.30"
-
+        perl-version: ${{ fromJson(vars.RTLDEV_MW_CI_PERL_MATRIX) }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up perl
